@@ -303,19 +303,45 @@ namespace ConsoleApp3
         }
         public static long MaxRot(long n)
         {
-            // your code
+            var str = n.ToString();
+            var max = n;
+            for (int i = 0; i < str.Length - 1; ++i)
+            {
+                str = str.Substring(0, i) + str.Substring(i + 1) + str[i];
+                max = (long.Parse(str) > max) ? long.Parse(str) : max;
+            }
+            return max;
         }    //30
         public static int NbDig(int n, int d)
         {
-            // your code
+            var result = d == 0 ? 1 : 0;
+            for (var k = 1; k <= n; ++k)
+            {
+                for (var x = k * k; x != 0; x /= 10)
+                {
+                    if (x % 10 == d)
+                    {
+                        ++result;
+                    }
+                }
+            }
+            return result;
         }  //31
         public static string Longest(string s1, string s2)
         {
-            // your code
+            return string.Concat((s1 + s2).Distinct().OrderBy(x => x));
         }   //32
         public static string PrinterError(String s)
         {
-            // your code
+            int num = s.Select(c => IsValid(c)).Sum();
+            return String.Format("{0}/{1}", num, s.Length);
+        }
+        public static int IsValid(char c)
+        {
+            if ('a' <= c && 'm' >= c)
+                return 0;
+            else
+                return 1;
         }  //33
         public static int SequenceSum(int start, int end, int step)
         {
